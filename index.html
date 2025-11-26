@@ -3,299 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>واتساب يمني متقدم</title>
-<link rel="stylesheet" href="style.css"> <!-- ربط ملف CSS الخارجي -->
+<title>تسجيل الدخول</title>
+<style>
+  body {
+    font-family: "Tahoma", sans-serif;
+    background: #01050a;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-box {
+    background: #f1eff2;
+    width: 330px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(218, 16, 16, 0.12);
+    text-align: center;
+  }
+
+  .login-box h2 {
+    margin-bottom: 15px;
+    color: #2d14bb;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #e92121;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+
+  button {
+    width: 100%;
+    background: #e6199e;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #12c1d4;
+  }
+
+  .note {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #c71111;
+  }
+</style>
 </head>
 <body>
-  
 
-<div class="container">
-  <!-- الشريط الجانبي -->
-  <div class="sidebar">
-    <!-- رأس الشريط الجانبي مع صورة المستخدم واسم التطبيق -->
-    <div class="header">
-      <img src="اليمن.jpg" alt="صورة شخصية" class="profile-img">
-      <h2>واتساب يمني</h2>
-    </div>
-
-    <!-- قسم الحالات -->
-    <div class="status-section">
-      <h3>الحالات</h3>
-      <button id="add-status-btn">➕ إضافة حالة</button> <!-- زر فتح نافذة إضافة الحالة -->
-      <div class="status-list" id="status-list"></div> <!-- قائمة عرض الحالات -->
-    </div>
-
-    <!-- قائمة المحادثات -->
-    <div class="chat-list">
-      <div class="chat-item active" data-user="ahmed">
-        <img src="IMG (2).jpg" alt="اصيل">
-        <span>اصيل العياشي<br>+967712345678</span>
-      </div>
-      
-      <div class="chat-item" data-user="fatima">
-        <img src="img.png" alt="رياض صالح">
-        <span>رياض صالح<br>+967712345679</span>
-      </div>
-      <div class="chat-item" data-user="mohamed">
-        <img src="شباب ستايل.jpg" alt="كهلان">
-        <span>كهلان الاكوع<br>+967712345680</span>
-      </div>
-      
-    </div>
-    
-  </div>
-
-  <!-- منطقة المحادثة -->
-  <div class="chat-area">
-    <!-- رأس المحادثة -->
-    <div class="chat-header">
-      <img src="ahmed.jpg" alt="صورة">
-      <h3 id="chat-user">اصيل العياشي</h3>
-    </div>
-
-    <!-- صندوق الرسائل -->
-    <div class="messages" id="messages"></div>
-
-    <!-- صندوق إدخال الرسائل -->
-    <div class="message-input">
-      <input type="file" id="file-input" accept="image/*,video/*,.pdf,.doc,.docx" style="display:none;">
-      <button id="attach-btn">📎</button> <!-- زر رفع ملفات -->
-      <input type="text" id="message-input" placeholder="اكتب رسالة هنا...">
-      <button id="mic-btn">🎤</button> <!-- زر تسجيل الصوت -->
-      <button id="send-btn">➤</button> <!-- زر الإرسال -->
-    </div>
-  </div>
-</div>
-
-<!-- نافذة إضافة الحالة -->
-<div id="status-modal" class="status-modal">
-  <div class="status-modal-content">
-    <span class="close" id="close-status-modal">&times;</span> <!-- زر إغلاق النافذة -->
-    <h3>إضافة حالة</h3>
-    <select id="status-user-select">
-      <option value="ahmed">اصيل</option>
-      <option value="fatima">رياض</option>
-      <option value="mohamed">كهلان</option>
-    </select>
-    <input type="file" id="status-file-input" accept="image/*,video/*"> <!-- رفع صورة أو فيديو للحالة -->
-    <button id="save-status-btn">إضافة</button>
-  </div>
-</div>
-
-<!-- نافذة عرض الحالة -->
-<div id="status-viewer-modal" class="status-viewer">
-  <span class="close" id="close-status-viewer">&times;</span> <!-- زر إغلاق العرض -->
-  <button id="prev-status">&#10094;</button> <!-- زر الحالة السابقة -->
-  <div id="status-viewer-content"></div> <!-- هنا يتم عرض الصورة أو الفيديو -->
-  <button id="next-status">&#10095;</button> <!-- زر الحالة التالية -->
-  <div id="status-viewer-user"></div> <!-- إظهار اسم المستخدم وعدد المشاهدات -->
+<div class="login-box" id="box">
+    <h2 id="title">إنشاء كلمة مرور</h2>
+    <input type="password" id="password" placeholder="أدخل كلمة مرور" />
+    <button onclick="handleAction()" id="actionBtn">حفظ</button>
+    <div class="note" id="note">سيتم حفظ كلمة المرور في جهازك.</div>
 </div>
 
 <script>
-// -------------------- البيانات والمحادثات --------------------
-const chats = { ahmed: [], fatima: [], mohamed: [] }; // حفظ المحادثات لكل مستخدم
-const userData = { 
-  ahmed:{name:"اصيل",img:"ahmed.jpg"}, 
-  fatima:{name:"رياض",img:"fatima.jpg"}, 
-  mohamed:{name:"كهلان",img:"mohamed.jpg"} 
-};
-let currentUser='ahmed'; // المستخدم الحالي في المحادثة
+const savedPass = localStorage.getItem("myAppPassword");
+const title = document.getElementById("title");
+const note = document.getElementById("note");
+const actionBtn = document.getElementById("actionBtn");
 
-const messagesEl=document.getElementById('messages');
-const inputEl=document.getElementById('message-input');
-const sendBtn=document.getElementById('send-btn');
-const chatItems=document.querySelectorAll('.chat-item');
-const chatUserEl=document.getElementById('chat-user');
-const chatHeaderImg=document.querySelector('.chat-header img');
-
-// تبديل المحادثة عند الضغط على أي شخص
-chatItems.forEach(item=>{
-  item.addEventListener('click',()=>{
-    chatItems.forEach(i=>i.classList.remove('active'));
-    item.classList.add('active');
-    currentUser=item.dataset.user;
-    chatUserEl.textContent=item.querySelector('span').textContent.split('\n')[0];
-    chatHeaderImg.src=item.querySelector('img').src;
-    renderMessages();
-  });
-});
-
-// عرض الرسائل في المحادثة
-function renderMessages(){
-  messagesEl.innerHTML='';
-  chats[currentUser].forEach(msg=>{
-    const div=document.createElement('div');
-    div.classList.add('message', msg.type);
-    div.innerHTML=`<span class="message-user">${msg.user}</span>${msg.text}<span class="message-time">${msg.time}</span>`;
-    messagesEl.appendChild(div);
-  });
-  messagesEl.scrollTop=messagesEl.scrollHeight;
+if (savedPass) {
+    title.innerText = "تسجيل الدخول";
+    actionBtn.innerText = "دخول";
+    note.innerText = "أدخل كلمة المرور للدخول للتطبيق";
 }
 
-// الحصول على الوقت الحالي
-function getCurrentTime(){
-  const now=new Date();
-  return `${now.getHours()}:${now.getMinutes().toString().padStart(2,'0')}`;
-}
+function handleAction() {
+    const pass = document.getElementById("password").value;
 
-// إرسال رسالة نصية
-function sendMessage(){
-  const text=inputEl.value.trim();
-  if(!text) return;
-  const time=getCurrentTime();
-  chats[currentUser].push({text,type:'sent',user:'أنت',time});
-  Object.keys(chats).forEach(user=>{
-    if(user!==currentUser) chats[user].push({text,type:'received',user:userData[currentUser].name,time});
-  });
-  inputEl.value='';
-  renderMessages();
-}
+    if (!pass) {
+        alert("الرجاء إدخال كلمة مرور");
+        return;
+    }
 
-sendBtn.addEventListener('click',sendMessage);
-inputEl.addEventListener('keypress',e=>{if(e.key==='Enter') sendMessage();});
-
-// -------------------- رفع الملفات --------------------
-const fileInput=document.getElementById('file-input');
-const attachBtn=document.getElementById('attach-btn');
-attachBtn.addEventListener('click',()=>fileInput.click());
-fileInput.addEventListener('change',()=>{
-  const file=fileInput.files[0];
-  if(!file) return;
-  const time=getCurrentTime();
-  let content='';
-  if(file.type.startsWith('image/')) content=`<img src="${URL.createObjectURL(file)}" style="max-width:200px;border-radius:10px;">`;
-  else if(file.type.startsWith('video/')) content=`<video controls style="max-width:200px;border-radius:10px;"><source src="${URL.createObjectURL(file)}" type="${file.type}"></video>`;
-  else content=`<a href="${URL.createObjectURL(file)}" target="_blank">${file.name}</a>`;
-  chats[currentUser].push({text:content,type:'sent',user:'أنت',time});
-  Object.keys(chats).forEach(user=>{
-    if(user!==currentUser) chats[user].push({text:content,type:'received',user:userData[currentUser].name,time});
-  });
-  renderMessages();
-  fileInput.value='';
-});
-
-// -------------------- تسجيل الصوت مع الإرسال --------------------
-const micBtn=document.getElementById('mic-btn');
-let mediaRecorder,audioChunks=[];
-
-micBtn.addEventListener('click',async()=>{
-  if(!mediaRecorder || mediaRecorder.state==='inactive'){
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    mediaRecorder=new MediaRecorder(stream);
-    audioChunks=[];
-    
-    mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-
-    mediaRecorder.onstop=()=>{
-      const audioBlob=new Blob(audioChunks,{type:'audio/webm'});
-      const audioUrl=URL.createObjectURL(audioBlob);
-      const time=getCurrentTime();
-      const content=`<audio controls src="${audioUrl}"></audio>`;
-
-      // إضافة للصديق الحالي
-      chats[currentUser].push({text:content,type:'sent',user:'أنت',time});
-
-      // إرسال لجميع المستخدمين الآخرين
-      Object.keys(chats).forEach(user=>{
-        if(user!==currentUser){
-          chats[user].push({text:content,type:'received',user:userData[currentUser].name,time});
+    if (!savedPass) {
+        localStorage.setItem("myAppPassword", pass);
+        alert("تم حفظ كلمة المرور بنجاح");
+        location.reload();
+    } else {
+        if (pass === savedPass) {
+            window.location.href = "index.html"; // ← رابط صفحة التطبيق
+        } else {
+            alert("كلمة المرور غير صحيحة");
         }
-      });
-
-      renderMessages();
-    };
-
-    mediaRecorder.start();
-    micBtn.textContent='⏹️'; // زر الإيقاف
-  } else {
-    mediaRecorder.stop();
-    micBtn.textContent='🎤'; // زر التسجيل
-  }
-});
-
-// -------------------- الحالات --------------------
-const statusListEl=document.getElementById('status-list');
-const statusModal=document.getElementById('status-modal');
-const addStatusBtn=document.getElementById('add-status-btn');
-const closeStatusModal=document.getElementById('close-status-modal');
-const saveStatusBtn=document.getElementById('save-status-btn');
-const statusFileInput=document.getElementById('status-file-input');
-const statusUserSelect=document.getElementById('status-user-select');
-const statusViewerModal=document.getElementById('status-viewer-modal');
-const statusViewerContent=document.getElementById('status-viewer-content');
-const statusViewerUser=document.getElementById('status-viewer-user');
-const closeStatusViewer=document.getElementById('close-status-viewer');
-const nextStatusBtn=document.getElementById('next-status');
-const prevStatusBtn=document.getElementById('prev-status');
-
-let statuses=[];
-let currentStatusIndex=0;
-
-// فتح نافذة إضافة الحالة
-addStatusBtn.addEventListener('click',()=>statusModal.style.display='flex');
-closeStatusModal.addEventListener('click',()=>statusModal.style.display='none');
-
-// حفظ الحالة بعد رفعها
-saveStatusBtn.addEventListener('click',()=>{
-  const file=statusFileInput.files[0];
-  if(!file) return alert('اختر ملف أولاً');
-  const user=statusUserSelect.value;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const type=file.type.startsWith('image/')?'image':'video';
-    const statusObj={user,src:e.target.result,type,views:0};
-    statuses.push(statusObj);
-    renderStatuses();
-    statusModal.style.display='none';
-    statusFileInput.value='';
-  };
-  reader.readAsDataURL(file);
-});
-
-// عرض الحالات في الشريط الجانبي
-function renderStatuses(){
-  statusListEl.innerHTML='';
-  statuses.forEach((s,i)=>{
-    const div=document.createElement('div');
-    div.classList.add('status-item');
-    div.dataset.user=s.user;
-    div.dataset.index=i;
-    div.innerHTML=s.type==='image'?
-      `<img src="${s.src}" alt="${s.user}"><span>${userData[s.user].name}</span>`:
-      `<video src="${s.src}" style="width:55px;height:55px;border-radius:50%;"></video><span>${userData[s.user].name}</span>`;
-    div.addEventListener('click',()=>showStatusViewer(i));
-    statusListEl.appendChild(div);
-  });
+    }
 }
-
-// عرض الحالة في نافذة أكبر عند الضغط عليها
-function showStatusViewer(index){
-  currentStatusIndex=index;
-  const s=statuses[index];
-  if(!s) return;
-  s.views+=1;
-  // تعديل حجم الصورة والفيديو ليكون أكبر وواضح
-  statusViewerContent.innerHTML = s.type==='image' ?
-    `<img src="${s.src}" alt="${s.user}" style="max-width:80%;max-height:80%;">` :
-    `<video src="${s.src}" autoplay controls style="max-width:80%;max-height:80%;"></video>`;
-  statusViewerUser.textContent=`${userData[s.user].name} - ${s.views} مشاهدة`;
-  statusViewerModal.style.display='flex';
-}
-
-// إغلاق نافذة عرض الحالة
-closeStatusViewer.addEventListener('click',()=>statusViewerModal.style.display='none');
-
-// الانتقال للحالة التالية أو السابقة
-nextStatusBtn.addEventListener('click',()=>showStatusViewer((currentStatusIndex+1)%statuses.length));
-prevStatusBtn.addEventListener('click',()=>showStatusViewer((currentStatusIndex-1+statuses.length)%statuses.length));
-
-// إغلاق نافذة الحالة بزر ESC
-document.addEventListener('keydown',(e)=>{
-  if(e.key==='Escape'){
-    statusViewerModal.style.display='none';
-  }
-});
 </script>
-<a href="..c:\Users\M.D\Desktop\CRUDS\crud.html">javascrapt</a>
+
 </body>
 </html>
