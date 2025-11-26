@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول</title>
+<style>
+  body {
+    font-family: "Tahoma", sans-serif;
+    background: #01050a;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-box {
+    background: #f1eff2;
+    width: 330px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(218, 16, 16, 0.12);
+    text-align: center;
+  }
+
+  .login-box h2 {
+    margin-bottom: 15px;
+    color: #2d14bb;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #e92121;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+
+  button {
+    width: 100%;
+    background: #e6199e;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #12c1d4;
+  }
+
+  .note {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #c71111;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-box" id="box">
+    <h2 id="title">إنشاء كلمة مرور</h2>
+    <input type="password" id="password" placeholder="أدخل كلمة مرور" />
+    <button onclick="handleAction()" id="actionBtn">حفظ</button>
+    <div class="note" id="note">سيتم حفظ كلمة المرور في جهازك.</div>
+</div>
+
+<script>
+const savedPass = localStorage.getItem("myAppPassword");
+const title = document.getElementById("title");
+const note = document.getElementById("note");
+const actionBtn = document.getElementById("actionBtn");
+
+if (savedPass) {
+    title.innerText = "تسجيل الدخول";
+    actionBtn.innerText = "دخول";
+    note.innerText = "أدخل كلمة المرور للدخول للتطبيق";
+}
+
+function handleAction() {
+    const pass = document.getElementById("password").value;
+
+    if (!pass) {
+        alert("الرجاء إدخال كلمة مرور");
+        return;
+    }
+
+    if (!savedPass) {
+        localStorage.setItem("myAppPassword", pass);
+        alert("تم حفظ كلمة المرور بنجاح");
+        location.reload();
+    } else {
+        if (pass === savedPass) {
+            window.location.href = "index.html"; // ← رابط صفحة التطبيق
+        } else {
+            alert("كلمة المرور غير صحيحة");
+        }
+    }
+}
+</script>
+
+</body>
+</html>

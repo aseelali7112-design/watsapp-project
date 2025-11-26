@@ -1,0 +1,350 @@
+/* ************* القواعد العامة ************* */
+* {
+  margin: 0; /* إزالة الهوامش الافتراضية */
+  padding: 0; /* إزالة الحشو الافتراضي */
+  box-sizing: border-box; /* جعل الحشو والحدود ضمن أبعاد العنصر */
+}
+
+/* ************* جسم الصفحة ************* */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* الخط الافتراضي */
+  height: 100vh; /* ارتفاع الصفحة كامل */
+  display: flex;
+  justify-content: center; /* توسيط المحتوى أفقياً */
+  align-items: center;     /* توسيط المحتوى عمودياً */
+  /* خلفية العلم اليمني */
+  background: linear-gradient(180deg, #ce1126 0%, #ce1126 33%, #ffffff 33%, #ffffff 66%, #000000 66%, #000000 100%);
+}
+
+/* ************* الحاوية الرئيسية ************* */
+.container {
+  width: 300%;
+  max-width: 1500px; /* الحد الأقصى للعرض */
+  height: 100vh;
+  display: flex; /* تقسيم المساحة بين الشريط الجانبي ومنطقة المحادثة */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(64, 20, 209, 0.3);
+  background: rgba(87, 16, 211, 0.95); /* خلفية شبه شفافة */
+}
+
+/* ************* الشريط الجانبي ************* */
+.sidebar {
+  width: 20%; /* نسبة عرض الشريط الجانبي */
+  display: flex;
+  flex-direction: column; /* ترتيب العناصر عمودياً */
+  border-left: 1px solid #ce0e28;
+  background: #ebeaed;
+}
+
+/* رأس الشريط الجانبي */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  gap: 10px; /* المسافة بين الصورة والنص */
+  background: #140305;
+  color: rgb(239, 235, 235);
+}
+
+/* صورة الملف الشخصي */
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* جعلها دائرية */
+  border: 2px solid rgb(232, 227, 227);
+}
+
+/* ************* قسم الحالات ************* */
+.status-section {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+}
+
+/* عنوان قسم الحالات */
+.status-section h3 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #ee0924;
+}
+
+/* زر إضافة حالة */
+#add-status-btn {
+  margin-bottom: 15px;
+  background: #370fd4; /* اللون الأخضر */
+  color: rgb(236, 230, 230);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* قائمة الحالات */
+.status-list {
+  display: flex;
+  gap: 15px; /* المسافة بين كل حالة */
+  overflow-x: auto; /* تمرير أفقي إذا تعدت المساحة */
+}
+
+/* كل حالة (صورة أو فيديو) */
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s; /* تأثير تكبير عند المرور */
+}
+
+.status-item img, .status-item video {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #25d366;
+  object-fit: cover; /* الحفاظ على نسب الصورة */
+}
+
+.status-item:hover {
+  transform: scale(1.1); /* تكبير بسيط عند المرور */
+}
+
+/* اسم المستخدم أسفل الصورة */
+.status-item span {
+  margin-top: 5px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ************* قائمة الدردشات ************* */
+.chat-list {
+  flex: 1;
+  overflow-y: auto; /* تمرير عمودي إذا زاد عدد الدردشات */
+}
+
+.chat-item {
+  padding: 15px;
+  border-bottom: 1px solid #0d0d0d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s; /* تغيير خلفية عند المرور */
+}
+
+/* عند المرور أو الاختيار */
+.chat-item:hover, .chat-item.active {
+  background: #f6f0f0;
+}
+
+/* صورة المستخدم في الدردشة */
+.chat-item img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* اسم ورقم المستخدم */
+.chat-item span {
+  flex: 1;
+}
+
+/* ************* منطقة المحادثة ************* */
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* رأس المحادثة */
+.chat-header {
+  padding: 15px;
+  background: #f60e25;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgb(243, 230, 230);
+}
+
+/* صندوق الرسائل */
+.messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto; /* تمرير عمودي */
+  background: #f4f1ee;
+}
+
+/* الرسائل */
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  position: relative;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* الرسائل المرسلة */
+.message.sent {
+  background: #dcf8c6;
+  margin-left: auto; /* توضع على اليمين */
+  border: 1px solid #079992;
+  align-items: flex-end;
+}
+
+/* الرسائل المستلمة */
+.message.received {
+  background: white;
+  margin-right: auto; /* توضع على اليسار */
+  border: 1px solid #ce1126;
+  align-items: flex-start;
+}
+
+/* وقت الرسالة */
+.message-time {
+  font-size: 11px;
+  color: #999;
+}
+
+/* اسم المستخدم */
+.message-user {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* ************* صندوق إدخال الرسائل ************* */
+.message-input {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  background: #f0f0f0;
+}
+
+.message-input input[type="text"] {
+  flex: 1;
+  padding: 20px 20px;
+  border-radius: 25px;
+  border: 4px solid #ce1126;
+  font-size: 20px;
+  outline: none;
+}
+
+/* أزرار الإدخال */
+.message-input button {
+  background: #ce1126;
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.message-input button:hover {
+  background: #a20e1f;
+}
+
+/* ************* نافذة إضافة الحالة ************* */
+.status-modal {
+  display: none; /* مخفية بشكل افتراضي */
+  position: fixed;
+  z-index: 1000;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5); /* خلفية داكنة */
+  justify-content: center;
+  align-items: center;
+}
+
+.status-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.status-modal .close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ************* نافذة عرض الحالة ************* */
+.status-viewer {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  flex-direction: column;
+}
+
+/* تعديل حجم الصورة والفيديو عند العرض لتكون كبيرة وواضحة */
+.status-viewer img, .status-viewer video {
+  max-width: 80%;  /* عرض أكبر */
+  max-height: 80%; /* ارتفاع أكبر */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.status-viewer button {
+  background: rgba(255,255,255,0.2);
+  color:white;
+  border:none;
+  font-size:30px;
+  cursor:pointer;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  padding:10px;
+}
+
+#prev-status { left:10px; }
+#next-status { right:10px; }
+
+.status-viewer .close {
+  position: absolute;
+  top:10px;
+  right:15px;
+  font-size: 30px;
+  cursor:pointer;
+}
+
+/* ************* الاستجابة للشاشات الصغيرة ************* */
+@media (max-width: 768px){
+  .container{
+    width:100%;
+    height:100vh;
+    border-radius:0;
+  }
+  .sidebar{
+    width:100%;
+    flex-direction:row;
+    overflow-x:auto;
+  }
+  .chat-area{
+    flex:1;
+  }
+}
+
+
