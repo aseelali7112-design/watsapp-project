@@ -4,7 +4,22 @@
   padding: 0; /* إزالة الحشو الافتراضي */
   box-sizing: border-box; /* جعل الحشو والحدود ضمن أبعاد العنصر */
 }
+.java{
 
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  text-decoration: none;
+  color: #edf3f3;
+
+
+}
+.lii{
+  text-decoration: none;
+  color: #079992;
+}
 /* ************* جسم الصفحة ************* */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* الخط الافتراضي */
